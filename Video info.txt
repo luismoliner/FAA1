@@ -1,0 +1,65 @@
+FAA1
+FAH1
+Automated Data Cleaning; identify invalid values and/or rows and automatically solve the problem- NAN, missing, outliers, unreliable values, out of the range, automated data input. (Your group decide a solution for the each problem!)
+Human assisted Data Cleaning; identify invalid values and/or rows, create a list of possible actions that could be taken and create an user interface for a human to decide what to do - NAN, missing, outliers, unreliable values, out of the range. Once the action is chosen, perform the action.
+
+
+https://youtu.be/4fzAMdLKC5k
+https://speakerdeck.com/player/53a274d4fe7543aaae5a6a5a0c2fcb2e#
+daveops.com/pyohio2015
+
+PyPA (Python PAckaging)
+PyPUG (User Group)
+Module: python code in a file
+Import Package: namespace (directory with .py)
+Distribution Package: shareable / instalable. bundle of code
+Source Distribution: sdist
+Built Distribution: bdist_wheel (don't use egg)
+Wheel: Univerdal, Pure Python, Platform
+PyPI: Package Index (different pypy)
+
+sample project
+
+setup.py: information about your package
+setup.cfg: 
+MENIFEST.in: 
+
+
+README.rst
+DESCRIPTION.rst
+
+CI: travis.yml	travis-ci.org (test your code in different environments)
+requirements.txt
+gitignore
+
+pip install wheel, twine, tox
+pip install cookiecutter
+mkvirtualenv pyohio2015
+-------------------------------------
+
+https://www.youtube.com/watch?v=0fKg7e37bQE
+Source Control
+
+git clone URL
+git status
+git add index.html // git add . // git add /A
+git commit -m "added index.html"
+git push
+
+git pull (being in the proper directory)
+
+git (shows all the commands)
+
+-------------------------------------
+Chris:
+https://try.github.io/ to get to know it.
+
+If you want to learn even more about github, version control and continuous integration, our colleague Fortis send me this course from codeacademy:  
+https://www.codecademy.com/learn/learn-git
+
+
+Another option is:
+https://www.coursera.org/learn/data-scientists-tools/lecture/SqWSK/introduction-to-github
+
+
+
