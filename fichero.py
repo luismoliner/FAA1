@@ -90,6 +90,7 @@ print ("\nInfo about the columns to transform:\n", pd.DataFrame(data),"\n")
 
 print("Transformed Data Frame\n", df)
 
+df.to_csv("transformed.csv")
 
 #for column in df.columns:
 #    print (column, df[column].dtypes)
