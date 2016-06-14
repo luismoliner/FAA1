@@ -74,7 +74,7 @@ for column in df.columns:
 #        print ("Vale")
         max = np.max(df[column])        
         p75 = df[column].quantile(0.75)
-        p50 = df[column].quantile(0.75)
+        p50 = df[column].quantile(0.5)
         p25 = df[column].quantile(0.25)
         min = np.min(df[column])        
         mean = df[column].mean()
