@@ -14,9 +14,9 @@ np.seterr(invalid='ignore')
 print("Original Data Frame\n", df)
 ### Have a quick look at the data
 #df.head()
-#df.columns
+#print(df.columns)
 #df.describe
-#df.dtypes
+#print(df.dtypes)
 
 #for column in df.columns:
 #    print (column, df[column][0], df[column][1], df[column].mean())
@@ -32,13 +32,14 @@ for column in df.columns:
         change = True
         for i in range (0,len(df)):
 #            if not df[column][i].replace('.','',1).isdigit(): Fails with NEG
+            if df[column][i].strip() == '':
+                continue
             if (re.match(r"[-+]?\d+(\.\d+)?$", df[column][i].strip()) is None):
-                if df[column][i].strip() != '':
-#                    print (column, i, df[column][i])
-                    change = False
+#                print (column, i, df[column][i])
+                change = False
 #        print (column, change)
         if change:
-            df[column]= df[column].replace(r"\s+", 0, regex=True)
+            df[column]= df[column].replace(r"\s+", '0', regex=True)
             df[column] = pd.to_numeric(df[column], errors='coerce')
 
 #print (space(3))
@@ -71,12 +72,14 @@ for column in df.columns:
 #    print (column, df[column].dtypes)
     if df[column].dtypes in ["int64", "float64"]:
 #        print ("Vale")
+        max = np.max(df[column])        
         p75 = df[column].quantile(0.75)
         p50 = df[column].quantile(0.75)
         p25 = df[column].quantile(0.25)
+        min = np.min(df[column])        
         mean = df[column].mean()
         iqr = p75 - p25
-        data.update({column : pd.Series([df[column].dtypes, p25, p50, p75, mean], index=["Type", "P25", "P50", "P75", "Mean"])})
+        data.update({column : pd.Series([df[column].dtypes, min, p25, p50, mean, p75, max], index=["Type", "MIN", "P25", "P50", "Mean", "P75", "MAX"])})
 #        print (column, df[column].dtypes, p25, p50, p75, mean)
         for i in range (0,len(df)):
             if (df[column][i] > (p75 + 1.5*iqr)):
