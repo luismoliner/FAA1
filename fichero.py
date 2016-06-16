@@ -8,7 +8,8 @@ import re
 #import pylab as p
 #import matplotlib
 
-df = pd.read_csv("Example.csv")
+df = pd.read_csv("Example2.csv")
+#df = pd.read_csv("TESTFA1.csv", sep=',' and ';')
 np.seterr(invalid='ignore')
 #pd.set_option('display.max_rows', len(df))
 print("Original Data Frame\n", df)
