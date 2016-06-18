@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import re
 
-df = pd.read_csv("Example2.csv")
+df = pd.read_csv("Example1.csv")
 #df = pd.read_csv("TESTFA1.csv", sep=',' and ';')
 np.seterr(invalid='ignore')
 print("Original Data Frame\n", df)
@@ -23,6 +23,7 @@ df.fillna(0, inplace=True)
 # replaces the latter with 0.
 # Removes whitespaces before or after the numbers.
 for column in df.columns:
+    
     if df[column].dtypes in ["object"]:
         change = True
 # The column is going to change if all the values (without whitespaces)
@@ -30,7 +31,8 @@ for column in df.columns:
 # changed to accept numbers like .35 as 0.35
         for i in range (0,len(df)):
             if (re.match(r"[-+]?\d+(\.\d+)?$", str(df[column][i]).strip()) is None):
-                change = False
+                if (not pd.isnull(df[column][i]) and df[column][i].strip() != ''):
+                    change = False
         if change:
 # If the value is a set of whitespaces, they are replaced by 0, otherwise
 # whitespaces are deleted and finally the column type is changed to numeric
@@ -43,7 +45,7 @@ for column in df.columns:
 # Values out of the upper and lower limits are replaced for the limit values
 data = {}
 for column in df.columns:
-    if df[column].dtypes in ["int64", "float64"]:
+    if (df[column].dtypes in ["int64", "float64"]):
         max = np.max(df[column])        
         p75 = df[column].quantile(0.75)
         p50 = df[column].quantile(0.5)
@@ -56,6 +58,11 @@ for column in df.columns:
         valueslist = [lower, min, p25, p50, mean, p75, max, upper]
         tagslist = ["LOWER", "MIN", "P25", "P50", "Mean", "P75", "MAX", "UPPER"]
         data.update({column : pd.Series([df[column].dtypes]+valueslist, index=["Type"]+tagslist)})
+# If it is binary don't detect outliers
+        if (set(df[column]) == {0,1}):
+            continue
+# Loops the values in a column looking for extreme values
+# When it finds extreme values sustitutes them, offering several choices
         for i in range (0,len(df)):
             if (df[column][i] > upper):
                 df.set_value(i, column, upper)
